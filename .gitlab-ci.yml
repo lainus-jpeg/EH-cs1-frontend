@@ -10,7 +10,7 @@ build:
   image: node:${NODE_VERSION}
   script:
     - npm ci
-    - npm run dev
+    - npm run build
   artifacts:
     paths:
       - dist/
