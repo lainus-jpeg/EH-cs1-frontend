@@ -51,4 +51,3 @@ deploy:frontend:
   environment:
     name: production
     url: https://fronteynfrontend.delightfulsea-663eb54f.spaincentral.azurecontainerapps.io
-    - master
