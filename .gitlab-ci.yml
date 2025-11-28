@@ -2,11 +2,14 @@ stages:
   - build
   - deploy
 
-build:frontend:
-  image: node:18
+variables:
+  NODE_VERSION: "18"
+
+build:
   stage: build
+  image: node:${NODE_VERSION}
   script:
-    - npm install
+    - npm ci
     - npm run build
   artifacts:
     paths:
@@ -16,22 +19,17 @@ build:frontend:
     - main
     - master
 
-deploy:frontend:
-  image: node:18
+deploy:
   stage: deploy
+  image: node:${NODE_VERSION}
   dependencies:
-    - build:frontend
-  script:
+    - build
+  before_script:
     - npm install -g @azure/static-web-apps-cli
-    - |
-      swa deploy \
-        ./dist \
-        --deployment-token "$AZURE_STATIC_WEB_APPS_DEPLOYMENT_TOKEN"
-      
-      echo "Frontend deployed successfully to Azure Static Web Apps"
+  script:
+    - swa deploy ./dist --deployment-token "$AZURE_STATIC_WEB_APPS_DEPLOYMENT_TOKEN"
   only:
     - main
     - master
   environment:
     name: production
-    url: https://wonderful-mushroom-0ea303e03.3.azurestaticapps.net
