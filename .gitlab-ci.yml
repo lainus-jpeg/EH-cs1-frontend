@@ -17,20 +17,16 @@ build:frontend:
     - master
 
 deploy:frontend:
-  image: mcr.microsoft.com/azure-cli:latest
+  image: node:18
   stage: deploy
   dependencies:
     - build:frontend
   script:
-    - apk add --no-cache bash
+    - npm install -g @azure/static-web-apps-cli
     - |
-      # Deploy to Azure Web App
-      az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-      
-      az staticwebapp update \
-        --name fronteynfrontend \
-        --resource-group Fonteyn \
-        --source "$(pwd)/dist"
+      swa deploy \
+        ./dist \
+        --deployment-token "$AZURE_STATIC_WEB_APPS_DEPLOYMENT_TOKEN"
       
       echo "Frontend deployed successfully to Azure Static Web Apps"
   only:
@@ -38,4 +34,4 @@ deploy:frontend:
     - master
   environment:
     name: production
-    url: https://fronteynfrontend.delightfulsea-663eb54f.spaincentral.azurecontainerapps.io
+    url: https://wonderful-mushroom-0ea303e03.3.azurestaticapps.net
