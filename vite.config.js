@@ -5,8 +5,15 @@ import fs from 'fs'
 function getHtmlFiles(dir = './') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   let files = [];
+  
+  // Skip these directories
+  const skipDirs = ['node_modules', '.git', 'dist', 'public', 'src'];
 
   for (const entry of entries) {
+    if (entry.isDirectory() && skipDirs.includes(entry.name)) {
+      continue;
+    }
+    
     const fullPath = resolve(dir, entry.name);
     if (entry.isDirectory()) {
       files = files.concat(getHtmlFiles(fullPath));
