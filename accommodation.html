@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accommodation Details</title>
+  <link rel="stylesheet" href="/styles/mapstyle.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area" style="cursor:pointer;" onclick="window.location.href='/'">
+      <div class="logo"></div>
+      <h1>Fonteyn Holiday Park</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <section class="content-wrapper">
+      <a href="park">&larr; Back to Accommodation List</a>
+      <h1 id="accommodation-name">Loading...</h1>
+      <p id="accommodation-description"></p>
+      <a id="button" href="#">Book!</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="about-footer">
+    <div class="about-footer-content contact-footer">
+      <div class="contact-country">
+        <h3>Netherlands Tech Support</h3>
+        <p>Email: nl@fonteynpark.com</p>
+        <p>Phone: +31 20 123 4567</p>
+        <p>Address: Amsterdamseweg 123, 1182 GP Amstelveen</p>
+      </div>
+      <div class="contact-country">
+        <h3>Belgium Tech Support</h3>
+        <p>Email: be@fonteynpark.com</p>
+        <p>Phone: +32 2 123 4567</p>
+        <p>Address: Rue Royale 100, 1000 Brussels</p>
+      </div>
+      <div class="contact-country">
+        <h3>Germany Tech Support</h3>
+        <p>Email: de@fonteynpark.com</p>
+        <p>Phone: +49 30 12345678</p>
+        <p>Address: Berliner Str. 10, 10117 Berlin</p>
+      </div>
+    </div>
+    <div class="footer-socials">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <img src="/icons/facebook.svg" alt="Facebook" width="32" height="32">
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <img src="/icons/instagram.svg" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://x.com" target="_blank" aria-label="X">
+        <img src="/icons/x.svg" alt="X" width="32" height="32">
+      </a>
+    </div>
+  </footer>
+
+  <script type="module" src="src/scripts/accommodation.js"></script>
+</body>
+</html>

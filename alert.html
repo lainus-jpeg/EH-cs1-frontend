@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter Alerts</title>
+  <link rel="stylesheet" href="styles/mapstyle.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area" style="cursor:pointer;" onclick="window.location.href='/'">
+      <div class="logo"></div>
+      <h1>Fonteyn Holiday Park</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    
+<section class="content-wrapper">
+  <h2>📬 Live Newsletter Signups</h2>
+  <ul id="newsletter-feed" class="newsletter-feed"></ul>
+
+  <h3>📢 Send a Newsletter to Subscribers</h3>
+  <input id="subject" placeholder="Subject" /><br><br>
+  <textarea id="message" placeholder="Message" rows="5" cols="50"></textarea><br>
+  <button onclick="sendNewsletter()">Send</button>
+  <p id="status"></p>
+</section>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.js"></script>
+<script type="module">
+  // Get API URL from .env via window object (set by Vite)
+  const API_URL = 'https://fonteynbackend.delightfulsea-663eb54f.spaincentral.azurecontainerapps.io';
+  const BACKEND_BASE = API_URL.replace('/v1', '');
+
+  const socket = io(BACKEND_BASE, {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    reconnectionAttempts: 5
+  }); 
+  const feed = document.getElementById("newsletter-feed");
+  const statusEl = document.getElementById('status');
+
+  socket.on("connect", () => {
+    console.log('✅ Connected to live updates');
+    statusEl.textContent = '✅ Connected to live updates';
+    statusEl.style.color = 'green';
+  });
+
+  socket.on("newsletter-signup", (data) => {
+    console.log('📬 New signup:', data);
+    const li = document.createElement("li");
+    li.textContent = `📧 ${data.email} just signed up! (${new Date(data.timestamp).toLocaleTimeString()})`;
+    feed.prepend(li);
+  });
+
+  socket.on("disconnect", () => {
+    console.log('❌ Disconnected from live updates');
+    statusEl.textContent = '❌ Disconnected from live updates';
+    statusEl.style.color = 'red';
+  });
+
+  socket.on("error", (error) => {
+    console.error('❌ Socket.io error:', error);
+    statusEl.textContent = 'Connection error: ' + error;
+    statusEl.style.color = 'red';
+  });
+
+  socket.on("connect_error", (error) => {
+    console.error('❌ Connection error:', error);
+    statusEl.textContent = 'Failed to connect: ' + error.message;
+    statusEl.style.color = 'red';
+  });
+
+  window.sendNewsletter = function() {
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+
+    if (!subject || !message) {
+      alert('Please fill in subject and message');
+      return;
+    }
+
+    statusEl.textContent = 'Sending...';
+
+    fetch(API_URL + '/v1/send-newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subject, message })
+    })
+    .then(res => res.json())
+    .then(data => {
+      statusEl.textContent = data.message || 'Newsletter sent!';
+      statusEl.style.color = 'green';
+      document.getElementById('subject').value = '';
+      document.getElementById('message').value = '';
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      statusEl.textContent = 'Error sending email: ' + err.message;
+      statusEl.style.color = 'red';
+    });
+  }
+</script>
+
+    <!-- Example: <section class="content-wrapper"> ... </section> -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="about-footer">
+    <div class="about-footer-content contact-footer">
+      <div class="contact-country">
+        <h3>Netherlands Tech Support</h3>
+        <p>Email: nl@fonteynpark.com</p>
+        <p>Phone: +31 20 123 4567</p>
+        <p>Address: Amsterdamseweg 123, 1182 GP Amstelveen</p>
+      </div>
+      <div class="contact-country">
+        <h3>Belgium Tech Support</h3>
+        <p>Email: be@fonteynpark.com</p>
+        <p>Phone: +32 2 123 4567</p>
+        <p>Address: Rue Royale 100, 1000 Brussels</p>
+      </div>
+      <div class="contact-country">
+        <h3>Germany Tech Support</h3>
+        <p>Email: de@fonteynpark.com</p>
+        <p>Phone: +49 30 12345678</p>
+        <p>Address: Berliner Str. 10, 10117 Berlin</p>
+      </div>
+    </div>
+    <div class="footer-socials">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <img src="icons/facebook.svg" alt="Facebook" width="32" height="32">
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <img src="icons/instagram.svg" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://x.com" target="_blank" aria-label="X">
+        <img src="icons/x.svg" alt="X" width="32" height="32">
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

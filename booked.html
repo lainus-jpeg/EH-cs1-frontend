@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Details</title>
+  <link rel="stylesheet" href="/tyles/mapstyle.css">
+  <link rel="stylesheet" href="/styles/mapstyle.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area" style="cursor:pointer;" onclick="window.location.href='/'">
+      <div class="logo"></div>
+      <h1>Fonteyn Holiday Park</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <section class="content-wrapper">
+      <div class="container">
+        <h1>Details for booking <span id="id"></span></h1>
+        <p><a href="#" id="acc-name">Loading</a></p>
+        <p id="dates">Loading</p>
+      </div>
+    </section>
+    <script type="module" src="src/scripts/booked.js"></script>
+  </main>
+
+  <!-- Footer -->
+  <footer class="about-footer">
+    <div class="about-footer-content contact-footer">
+      <div class="contact-country">
+        <h3>Netherlands</h3>
+        <p>Email: nl@fonteynpark.com</p>
+        <p>Phone: +31 20 123 4567</p>
+        <p>Address: Amsterdamseweg 123, 1182 GP Amstelveen</p>
+      </div>
+      <div class="contact-country">
+        <h3>Belgium</h3>
+        <p>Email: be@fonteynpark.com</p>
+        <p>Phone: +32 2 123 4567</p>
+        <p>Address: Rue Royale 100, 1000 Brussels</p>
+      </div>
+      <div class="contact-country">
+        <h3>Germany</h3>
+        <p>Email: de@fonteynpark.com</p>
+        <p>Phone: +49 30 12345678</p>
+        <p>Address: Berliner Str. 10, 10117 Berlin</p>
+      </div>
+    </div>
+    <div class="footer-socials">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <img src="/icons/facebook.svg" alt="Facebook" width="32" height="32">
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <img src="/icons/instagram.svg" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://x.com" target="_blank" aria-label="X">
+        <img src="/icons/x.svg" alt="X" width="32" height="32">
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
