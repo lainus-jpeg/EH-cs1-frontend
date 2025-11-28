@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
+import { fileURLToPath } from 'url'
 import fs from 'fs'
 
 function getHtmlFiles(dir = './') {
@@ -28,8 +29,9 @@ function getHtmlFiles(dir = './') {
 const htmlInputMap = {};
 getHtmlFiles('./').forEach((file) => {
   const name = file
-    .replace(/^\.\/|\.html$/g, '') 
-    .replace(/\//g, '_'); 
+    .replace(/\\/g, '/')  // Convert backslashes to forward slashes
+    .replace(/^.*\//, '')  // Get just the filename
+    .replace(/\.html$/, '');  // Remove .html extension
   htmlInputMap[name] = file;
 });
 
