@@ -2,7 +2,6 @@ stages:
   - build
   - deploy
 
-# Frontend build
 build:frontend:
   image: node:18
   stage: build
@@ -17,7 +16,6 @@ build:frontend:
     - main
     - master
 
-# Frontend deployment to Azure
 deploy:frontend:
   image: mcr.microsoft.com/azure-cli:latest
   stage: deploy
