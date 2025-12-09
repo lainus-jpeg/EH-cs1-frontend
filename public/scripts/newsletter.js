@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const newsletterEmail = document.getElementById('newsletter-email');
 
   // Azure backend URL
-  const BACKEND_URL = 'https://fonteynbackend.delightfulsea-663eb54f.spaincentral.azurecontainerapps.io/v1/newsletter-signup';
+  const BACKEND_URL = 'https://fonteynbackend.wittypebble-be3e1c7a.spaincentral.azurecontainerapps.io/v1/newsletter-signup';
 
   if (newsletterForm && newsletterEmail && newsletterSuccess) {
     newsletterForm.addEventListener('submit', async function (e) {
