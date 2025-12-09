@@ -3,7 +3,6 @@ const status = document.getElementById("status");
 
 const url = import.meta.env.VITE_API_URL
 
-//liander added code to prevent brute force login attempts
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 5;
 
