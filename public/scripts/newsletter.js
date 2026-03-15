@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const newsletterSuccess = document.getElementById('newsletter-success');
   const newsletterEmail = document.getElementById('newsletter-email');
 
-  // Azure backend URL
-  const BACKEND_URL = 'https://fonteynbackend.wittypebble-be3e1c7a.spaincentral.azurecontainerapps.io/v1/newsletter-signup';
+  // Backend URL - Use relative path so it routes through ALB
+  const BACKEND_URL = '/v1/newsletter-signup';
 
   if (newsletterForm && newsletterEmail && newsletterSuccess) {
     newsletterForm.addEventListener('submit', async function (e) {
