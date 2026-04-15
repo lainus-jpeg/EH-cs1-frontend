@@ -1,8 +1,6 @@
 const form = document.getElementById("login-form");
 const status = document.getElementById("status");
 
-const url = import.meta.env.VITE_API_URL
-
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 5;
 
@@ -31,7 +29,7 @@ form.addEventListener("submit", async (e) => {
   const password = form.password.value;
 
   try {
-    const res = await fetch(url + "/v1/auth/login", {
+    const res = await fetch("/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

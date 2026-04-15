@@ -1,7 +1,3 @@
-console.log(import.meta.env)
-const url = import.meta.env.VITE_API_URL
-console.log(url)
-
 const form = document.getElementById('login-form');
 const status = document.getElementById('status');
 
@@ -14,7 +10,7 @@ form.addEventListener('submit', async (e) => {
   const password = form.password.value;
 
   try {
-    const res = await fetch(url + '/v1/auth/register', {
+    const res = await fetch('/v1/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
