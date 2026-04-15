@@ -14,7 +14,7 @@ form.addEventListener('submit', async (e) => {
   const password = form.password.value;
 
   try {
-    const res = await fetch(url + '/auth/register', {
+    const res = await fetch(url + '/v1/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
